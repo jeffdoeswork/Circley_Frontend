@@ -2,9 +2,22 @@
   "name": "circley-frontend",
   "version": "1.0.0",
   "private": true,
-  "description": "Simple JSX build-free prototype for Circley (no Vite required).",
+  "description": "Bundled Circley prototype powered by esbuild (no Vite).",
   "scripts": {
-    "start": "npx serve .",
-    "clean": "rm -rf dist"
+    "clean": "rimraf dist",
+    "copy-static": "cpx index.html dist && cpx \"src/*.css\" dist",
+    "build": "npm run clean && npm run copy-static && esbuild src/main.jsx --bundle --format=esm --minify --sourcemap --define:process.env.NODE_ENV='\"production\"' --outfile=dist/bundle.js",
+    "preview": "npx serve dist",
+    "start": "npm run build && npm run preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "cpx": "^1.5.0",
+    "esbuild": "^0.19.4",
+    "rimraf": "^5.0.0",
+    "serve": "^14.2.0"
   }
 }
