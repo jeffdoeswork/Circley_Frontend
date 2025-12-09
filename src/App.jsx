@@ -7,6 +7,7 @@ import Home from "./home";
 import Find from "./Find";
 import Circles from "./Circles";
 import UserLog from "./Log";
+import Verify from "./Verify";
 
 import {
   Login,
@@ -26,8 +27,6 @@ export default function App() {
     dateJoined: "Jan 12, 2024",
   });
 
-  // If navigation is ever updated to include query, strip it,
-  // then normalize. If not, this is still safe.
   const [rawPathname] = (path || "/").split("?");
   const currentPath = normalizePath(rawPathname || "/");
 
@@ -86,7 +85,12 @@ export default function App() {
     case "/find/therapist/":
     case "/find/sober-living/":
     case "/find/meetings/":
-      page = <Find isAuthenticated={isAuthenticated} username={user.username} />;
+      page = (
+        <Find
+          isAuthenticated={isAuthenticated}
+          username={user.username}
+        />
+      );
       break;
 
     case "/circles/":
@@ -96,13 +100,15 @@ export default function App() {
       page = <Circles username={user.username} />;
       break;
 
-    // All log sub-paths render the same Log component,
-    // which decides what to show based on currentPath.
     case "/log/":
     case "/log/milestone/":
     case "/log/goal/":
     case "/log/trigger/":
       page = <UserLog username={user.username} />;
+      break;
+
+    case "/verify/":
+      page = <Verify />;
       break;
 
     case "/account/":
@@ -118,15 +124,6 @@ export default function App() {
 
     case "/admin/":
       page = <AdminHome username={user.username} />;
-      break;
-
-    case "/verify/":
-      page = (
-        <PlaceholderPage
-          title="Verify"
-          description="User verification tools will live here. For now, return home to keep exploring."
-        />
-      );
       break;
 
     case "/rate/":
