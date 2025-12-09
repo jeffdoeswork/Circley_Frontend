@@ -4,7 +4,7 @@ import { Link, usePage } from "./navigation";
 import "./Home.css";
 
 /* ────────────────────────────────────────────────
-   SOS Overlay Component (merged here)
+   SOS Overlay Component (named export)
 ──────────────────────────────────────────────────*/
 export function SOSOverlay({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -28,10 +28,7 @@ export function SOSOverlay({ isOpen, onClose }) {
           </p>
 
           <div className="home-sos-actions">
-            <a
-              href="tel:988"
-              className="home-sos-btn home-sos-btn--red"
-            >
+            <a href="tel:988" className="home-sos-btn home-sos-btn--red">
               Call 988 (Crisis Hotline)
             </a>
 
@@ -62,7 +59,7 @@ export function SOSOverlay({ isOpen, onClose }) {
 }
 
 /* ────────────────────────────────────────────────
-   Bottom Navigation Component
+   Bottom Navigation Component (default export)
 ──────────────────────────────────────────────────*/
 export default function BottomNav({ active }) {
   const { url } = usePage();
@@ -70,7 +67,7 @@ export default function BottomNav({ active }) {
   const [isSosOpen, setIsSosOpen] = useState(false);
 
   useEffect(() => {
-    // Close SOS overlay whenever the route changes
+    // Close SOS overlay on route change
     setIsSosOpen(false);
   }, [current]);
 

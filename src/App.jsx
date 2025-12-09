@@ -12,7 +12,7 @@ import {
   AdminHome,
   PlaceholderPage,
   NotFound,
-} from "./pages";
+} from "./home";
 import BottomNav from "./BottomNav";
 
 export default function App() {

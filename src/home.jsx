@@ -1,13 +1,9 @@
 // src/pages.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigation, useSosToggle } from "./navigation";
-import { BottomNav, SOSOverlay } from "./shared-ui";
+import BottomNav, { SOSOverlay } from "./BottomNav";
 // If using Leaflet via npm, uncomment this and install: npm install leaflet
 // import L from "leaflet";
-
-//////////////////////////
-// HOME
-//////////////////////////
 
 export function Home({ username, isAuthenticated, sobrietyDays = 45 }) {
   const { navigate } = useNavigation();
