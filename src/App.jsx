@@ -1,19 +1,21 @@
 // src/App.jsx
 import React, { useState } from "react";
 import { useNavigation, normalizePath } from "./navigation";
+
+// Page components
+import Home from "./home";
+import Find from "./Find";
+import Circles from "./Circles";
+import UserLog from "./Log";
+
 import {
-  Home,
-  Find,
-  Circles,
-  UserLog,
   Login,
   Signup,
   UserAccount,
   AdminHome,
   PlaceholderPage,
   NotFound,
-} from "./home";
-import BottomNav from "./BottomNav";
+} from "./pages";
 
 export default function App() {
   const { path, navigate } = useNavigation();
@@ -68,24 +70,30 @@ export default function App() {
         />
       );
       break;
+
     case "/login/":
       page = <Login onLogin={handleLogin} />;
       break;
+
     case "/signup/":
       page = <Signup onSignup={handleSignup} />;
       break;
+
     case "/find/":
     case "/find/therapist/":
     case "/find/sober-living/":
     case "/find/meetings/":
       page = <Find isAuthenticated={isAuthenticated} username={user.username} />;
       break;
+
     case "/circles/":
       page = <Circles username={user.username} />;
       break;
+
     case "/log/":
       page = <UserLog username={user.username} />;
       break;
+
     case "/account/":
       page = (
         <UserAccount
@@ -96,9 +104,11 @@ export default function App() {
         />
       );
       break;
+
     case "/admin/":
       page = <AdminHome username={user.username} />;
       break;
+
     case "/verify/":
       page = (
         <PlaceholderPage
@@ -107,6 +117,7 @@ export default function App() {
         />
       );
       break;
+
     case "/rate/":
       page = (
         <PlaceholderPage
@@ -115,6 +126,7 @@ export default function App() {
         />
       );
       break;
+
     case "/logout/":
       handleLogout();
       page = (
@@ -124,14 +136,12 @@ export default function App() {
         />
       );
       break;
+
     default:
       page = <NotFound />;
   }
 
-  return (
-    <>
-      {page}
-      <BottomNav active={currentPath} />
-    </>
-  );
+  // Each page component renders its own BottomNav,
+  // so we only render the page here.
+  return <>{page}</>;
 }
